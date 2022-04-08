@@ -20,21 +20,22 @@ namespace EmployeeWageComputation
                 Console.WriteLine("Employee is Absent");
 
         }
-        public void PartTimeWage()
+        public void EmployeeWageSwitch()
         {
             Random random = new Random();
             int check = random.Next(0, 3);
-            if(check == IS_PART_TIME)
+            switch (check)
             {
-                empHrs = 4;
-            }
-            else if (check == IS_FULL_TIME)
-            {
-                empHrs = 8;
-            }
-            else
-            {
-                empHrs = 0;
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    break;
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    break;
+                default:
+                    empHrs = 0;
+                    break;
+
             }
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee Wage :" + empWage);
