@@ -8,7 +8,7 @@ namespace EmployeeWageComputation
 {
     public class EmployeeAttendance
     {
-        const int IS_PRESENT = 0,IS_FULL_TIME=1,EMP_RATE_PER_HOUR=20;
+        const int IS_PRESENT = 0, IS_PART_TIME = 1, IS_FULL_TIME = 2, EMP_RATE_PER_HOUR = 20;
         int empHrs = 0, empWage = 0;
         public void EmployeeAttendence()
         {
@@ -20,11 +20,15 @@ namespace EmployeeWageComputation
                 Console.WriteLine("Employee is Absent");
 
         }
-        public void EmployeeWage()
+        public void PartTimeWage()
         {
             Random random = new Random();
-            int check = random.Next(0, 2);
-            if(check==IS_FULL_TIME)
+            int check = random.Next(0, 3);
+            if(check == IS_PART_TIME)
+            {
+                empHrs = 4;
+            }
+            else if (check == IS_FULL_TIME)
             {
                 empHrs = 8;
             }
