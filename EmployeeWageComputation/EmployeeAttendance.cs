@@ -9,7 +9,7 @@ namespace EmployeeWageComputation
     public class EmployeeAttendance
     {
         const int IS_PRESENT = 0, IS_PART_TIME = 1, IS_FULL_TIME = 2, EMP_RATE_PER_HOUR = 20;
-        const int NUM_OF_WORKING_DAYS = 20;
+        const int NUM_OF_WORKING_DAYS = 20, MAX_HRS_IN_MONTH = 10;
         
         public void EmployeeAttendence()
         {
@@ -21,11 +21,12 @@ namespace EmployeeWageComputation
                 Console.WriteLine("Employee is Absent");
 
         }
-        public void EmployeeWageMonth()
+        public void EmployeeWageMaxDays()
         {
-            int empHrs = 0, empWage = 0, totalEmpWage = 0;
-            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
+                totalWorkingDays++;
                 Random random = new Random();
                 int check = random.Next(0, 3);
                 switch (check)
@@ -41,10 +42,10 @@ namespace EmployeeWageComputation
                         break;
 
                 }
-                empWage = empHrs * EMP_RATE_PER_HOUR;
-                totalEmpWage += empWage;
-                Console.WriteLine("Employee Wage :" + empWage);
+                totalEmpHrs += empHrs;
+                Console.WriteLine("Day#:" + totalWorkingDays + " Emp Hrs :" + empHrs);
             }
+            int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Total Employee Wage :" + totalEmpWage);
         }
     }
