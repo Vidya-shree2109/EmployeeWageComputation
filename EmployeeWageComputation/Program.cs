@@ -2,4 +2,4 @@
 using System;
 EmployeeAttendance employee=new EmployeeAttendance();
 employee.EmployeeAttendence();
-employee.EmployeeWageSwitch();
+employee.EmployeeWageMonth();
