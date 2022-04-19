@@ -1,5 +1,5 @@
 ﻿using EmployeeWageComputation;
 using System;
-EmployeeAttendance employee=new EmployeeAttendance();
+EmployeeWageUsingClass employee=new EmployeeWageUsingClass();
 employee.EmployeeAttendence();
 employee.EmployeeWageMaxDays();
