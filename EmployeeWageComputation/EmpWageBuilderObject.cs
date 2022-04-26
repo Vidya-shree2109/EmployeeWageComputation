@@ -13,6 +13,7 @@ namespace EmployeeWageComputation
         public int EmpMaxWorkingHr { get; set; }
         public int EmpWorkingDayPerMonth { get; set; }
         public decimal TotalEmpWage { get; set; }
+        public decimal DailyEmployeeSalary { get; set; }
 
     }
 }

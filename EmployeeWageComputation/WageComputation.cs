@@ -11,7 +11,7 @@ namespace EmployeeWageComputation
     {
         const int PART_TIME_EMP = 1;
         const int FULL_TIME_EMP = 2;
-        int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, day = 0;
+        int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, day = 0, dailyEmpWage = 0;
         ArrayList compEmpWageList = new ArrayList();
         public WageComputation()
         {
@@ -22,16 +22,18 @@ namespace EmployeeWageComputation
                 EmpWagePerHr = Convert.ToInt32(Console.ReadLine()),
                 EmpMaxWorkingHr = Convert.ToInt32(Console.ReadLine()),
                 EmpWorkingDayPerMonth = Convert.ToInt32(Console.ReadLine()),
-                TotalEmpWage = 0
+                TotalEmpWage = 0,
+                DailyEmployeeSalary = 0
             };
-            Console.WriteLine("Enter the Company_Name \n EmpWage_Working_Pr_Hours \n Total_Working_Hours \n Total_Working_Das_In_Month");
+            Console.WriteLine("Enter :\nCompany Name\nEmpWage Working Per Hours\nTotal Working Hours\nTotal Working Days In Month");
             EmpWageBuilderObject company2 = new EmpWageBuilderObject()
             {
                 CompanyName = Console.ReadLine(),
                 EmpWagePerHr = Convert.ToInt32(Console.ReadLine()),
                 EmpMaxWorkingHr = Convert.ToInt32(Console.ReadLine()),
                 EmpWorkingDayPerMonth = Convert.ToInt32(Console.ReadLine()),
-                TotalEmpWage = 0
+                TotalEmpWage = 0,
+                DailyEmployeeSalary = 0
             };
             compEmpWageList.Add(company1);
             compEmpWageList.Add(company2);
@@ -42,7 +44,8 @@ namespace EmployeeWageComputation
             {
                 this.ComputeEmpWage(empWageBuilderObject);
                 empWageBuilderObject.TotalEmpWage = this.totalEmpSalary;
-                Console.WriteLine("Total Employee salary of One Employee  " + empWageBuilderObject.TotalEmpWage);
+                empWageBuilderObject.DailyEmployeeSalary = this.dailyEmpWage;
+                Console.WriteLine("Total salary of An Employee  " + empWageBuilderObject.TotalEmpWage);
             }
         }
         private void ComputeEmpWage(EmpWageBuilderObject empWageBuilderObject)
@@ -68,9 +71,10 @@ namespace EmployeeWageComputation
                 day++;
                 totalEmpHrs += empHrs;
                 Console.WriteLine("Days @" + empWageBuilderObject.EmpWorkingDayPerMonth + "empHours " + empHrs);
+                dailyEmpWage += empHrs * empWageBuilderObject.EmpWagePerHr;
+                Console.WriteLine("Daily Employee Wage of A Company:-->" + dailyEmpWage);
             }
             totalEmpSalary = totalEmpHrs * empWageBuilderObject.EmpWagePerHr;
-
         }
     }
 }
