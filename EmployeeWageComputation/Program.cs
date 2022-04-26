@@ -14,7 +14,7 @@ class Program
         company.AddCompanyEmpWage("SAMSUNG", 400, 200, 20);
         company.AddCompanyEmpWage("RELIANCE", 500, 100, 15);
         company.AddCompanyEmpWage("AIRTEL", 600, 150, 18);
-       // company.ComputeEmpWage();
+        company.ComputeEmpWage();
         Console.WriteLine(wage.toString());
     }
 }
