@@ -6,54 +6,62 @@ using System.Threading.Tasks;
 
 namespace EmployeeWageComputation
 {
-    public class WageComputation
+    public class WageComputation : InterfaceComputeEmpWage
     {
-        public const int IS_PART_TIME = 1, IS_FULL_TIME = 2;
-        private int numberOfCompany = 0;
-        private EmpWageBuilderObject[] companyEmpWageArray;
+        const int PART_TIME_EMP = 1;
+        const int FULL_TIME_EMP = 2;
+
+        private LinkedList<EmpWageBuilderObject> compEmpWageList;
+        private Dictionary<string, EmpWageBuilderObject> compToEmpWageMap;
         public WageComputation()
         {
-           this.companyEmpWageArray=new EmpWageBuilderObject[5];
+            this.compEmpWageList = new LinkedList<EmpWageBuilderObject>();
+            this.compToEmpWageMap = new Dictionary<string, EmpWageBuilderObject>();
         }
-        public void AddCompanyEmpWage(string companyName, int empWagePerHr, int maxWorkingHr, int empWorkingDaysPerMonth)
+        public void AddCompanyEmpWage(string company_Name, int emp_Wage_PR_Hr, int max_Working_Hr, int emp_Working_Days_Pr_Month)
         {
-            companyEmpWageArray[this.numberOfCompany] = new EmpWageBuilderObject(companyName, empWagePerHr, maxWorkingHr, empWorkingDaysPerMonth);
-            numberOfCompany++;
+            EmpWageBuilderObject empWageBuilderObject = new EmpWageBuilderObject(company_Name, emp_Wage_PR_Hr, max_Working_Hr, emp_Working_Days_Pr_Month);
+            this.compEmpWageList.AddLast(empWageBuilderObject);
+            this.compToEmpWageMap.Add(company_Name, empWageBuilderObject);
         }
-
         public void ComputeEmpWage()
         {
-            for (int i = 0; i < companyEmpWageArray.Length; i++)
+            foreach (EmpWageBuilderObject empWageBuilderObject in this.compEmpWageList)
             {
-                companyEmpWageArray[i].SetTotalEmpWage(this.ComputeEmpWage(this.companyEmpWageArray[i]));
-                Console.WriteLine(this.companyEmpWageArray[i].ToString());
+                empWageBuilderObject.SetTotalEmpWage(this.ComputeEmpWage(empWageBuilderObject));
+                Console.WriteLine(empWageBuilderObject.ToString());
             }
         }
         private int ComputeEmpWage(EmpWageBuilderObject empWageBuilderObject)
         {
-            int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, days = 0;
-            while (days <= empWageBuilderObject.empWorkingDaysPerMonth && empHrs < empWageBuilderObject.empMaxWorkingHr)
+            int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, day = 0;
+            while (day <= empWageBuilderObject.empWorkingDayPerMonth && empHrs < empWageBuilderObject.empMaxWorkingHr)
             {
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
 
                 switch (empCheck)
                 {
-                    case IS_FULL_TIME:
+                    case FULL_TIME_EMP:
                         empHrs += 8;
                         break;
-                    case IS_PART_TIME:
+                    case PART_TIME_EMP:
+
                         empHrs += 4;
                         break;
                     default:
                         empHrs = 0;
                         break;
                 }
-                days++;
+                day++;
                 totalEmpHrs += empHrs;
-                Console.WriteLine("\nDays @ " + empWageBuilderObject.empWorkingDaysPerMonth + " , " + "empHours" + " = " + empHrs);
+                Console.WriteLine("\nDays@" + empWageBuilderObject.empWorkingDayPerMonth + "empHours " + empHrs);
             }
             return totalEmpSalary = totalEmpHrs * empWageBuilderObject.empWagePerHr;
+        }
+        public int GetTotalEmpWage(string comp_Name)
+        {
+            return (int)this.compToEmpWageMap[comp_Name].totalEmpWage;
         }
     }
 }

@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace EmployeeWageComputation
 {
-   public class EmpWageBuilderObject
+    public class EmpWageBuilderObject
     {
         public string companyName;
         public int empWagePerHr;
         public int empMaxWorkingHr;
-        public int empWorkingDaysPerMonth;
+        public int empWorkingDayPerMonth;
         public decimal totalEmpWage;
         public EmpWageBuilderObject(string companyName, int empWagePerHr, int maxWorkingHr, int empWorkingDaysPerMonth)
         {
             this.companyName = companyName;
             this.empWagePerHr = empWagePerHr;
             this.empMaxWorkingHr = maxWorkingHr;
-            this.empWorkingDaysPerMonth = empWorkingDaysPerMonth;
+            this.empWorkingDayPerMonth = empWorkingDaysPerMonth;
+            this.totalEmpWage = 0;
         }
         public void SetTotalEmpWage(int totalEmpWage)
         {
@@ -28,5 +29,6 @@ namespace EmployeeWageComputation
         {
             return "Total Employee wage for Company:-->" + this.companyName + "=" + this.totalEmpWage;
         }
+
     }
 }

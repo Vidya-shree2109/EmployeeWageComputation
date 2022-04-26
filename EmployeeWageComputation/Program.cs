@@ -5,10 +5,13 @@ class Program
     public static void Main(String[] args)
     {
         WageComputation company = new WageComputation();
-        company.AddCompanyEmpWage("SAMSUNG", 400, 200, 20);
-        company.AddCompanyEmpWage("RELIANCE", 500, 100, 15);
-        company.AddCompanyEmpWage("AIRTEL", 600, 150, 18);
+        Console.WriteLine("Enter :\nThe Company Name\nEmpWage Working Per Hours\nTotal Working Hours\nTotal Working Days In Month");
+        string compName = Console.ReadLine();
+        int EmpWageWorkingPerHours = Convert.ToInt32(Console.ReadLine());
+        int TotalWorkingHours = Convert.ToInt32(Console.ReadLine());
+        int TotalWorkingDaysInMonth = Convert.ToInt32(Console.ReadLine());
+        company.AddCompanyEmpWage(compName, EmpWageWorkingPerHours, TotalWorkingHours, TotalWorkingDaysInMonth);
         company.ComputeEmpWage();
-        Console.WriteLine(company.ToString());
+        Console.WriteLine("Total wage for" + compName + ":" + " " + company.GetTotalEmpWage(compName));
     }
 }
