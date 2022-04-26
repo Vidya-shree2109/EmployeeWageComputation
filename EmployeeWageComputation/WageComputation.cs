@@ -1,41 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeeWageComputation
 {
-    public class WageComputation : InterfaceComputeEmpWage
+    public class WageComputation
     {
         const int PART_TIME_EMP = 1;
         const int FULL_TIME_EMP = 2;
-
-        private LinkedList<EmpWageBuilderObject> compEmpWageList;
-        private Dictionary<string, EmpWageBuilderObject> compToEmpWageMap;
+        int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, day = 0;
+        ArrayList compEmpWageList = new ArrayList();
         public WageComputation()
         {
-            this.compEmpWageList = new LinkedList<EmpWageBuilderObject>();
-            this.compToEmpWageMap = new Dictionary<string, EmpWageBuilderObject>();
-        }
-        public void AddCompanyEmpWage(string company_Name, int emp_Wage_PR_Hr, int max_Working_Hr, int emp_Working_Days_Pr_Month)
-        {
-            EmpWageBuilderObject empWageBuilderObject = new EmpWageBuilderObject(company_Name, emp_Wage_PR_Hr, max_Working_Hr, emp_Working_Days_Pr_Month);
-            this.compEmpWageList.AddLast(empWageBuilderObject);
-            this.compToEmpWageMap.Add(company_Name, empWageBuilderObject);
+            Console.WriteLine("Enter :\nCompany Name\nEmpWage Working Per Hours\nTotal Working Hours\nTotal Working Days In Month");
+            EmpWageBuilderObject company1 = new EmpWageBuilderObject()
+            {
+                CompanyName = Console.ReadLine(),
+                EmpWagePerHr = Convert.ToInt32(Console.ReadLine()),
+                EmpMaxWorkingHr = Convert.ToInt32(Console.ReadLine()),
+                EmpWorkingDayPerMonth = Convert.ToInt32(Console.ReadLine()),
+                TotalEmpWage = 0
+            };
+            Console.WriteLine("Enter the Company_Name \n EmpWage_Working_Pr_Hours \n Total_Working_Hours \n Total_Working_Das_In_Month");
+            EmpWageBuilderObject company2 = new EmpWageBuilderObject()
+            {
+                CompanyName = Console.ReadLine(),
+                EmpWagePerHr = Convert.ToInt32(Console.ReadLine()),
+                EmpMaxWorkingHr = Convert.ToInt32(Console.ReadLine()),
+                EmpWorkingDayPerMonth = Convert.ToInt32(Console.ReadLine()),
+                TotalEmpWage = 0
+            };
+            compEmpWageList.Add(company1);
+            compEmpWageList.Add(company2);
         }
         public void ComputeEmpWage()
         {
             foreach (EmpWageBuilderObject empWageBuilderObject in this.compEmpWageList)
             {
-                empWageBuilderObject.SetTotalEmpWage(this.ComputeEmpWage(empWageBuilderObject));
-                Console.WriteLine(empWageBuilderObject.ToString());
+                this.ComputeEmpWage(empWageBuilderObject);
+                empWageBuilderObject.TotalEmpWage = this.totalEmpSalary;
+                Console.WriteLine("Total Employee salary of One Employee  " + empWageBuilderObject.TotalEmpWage);
             }
         }
-        private int ComputeEmpWage(EmpWageBuilderObject empWageBuilderObject)
+        private void ComputeEmpWage(EmpWageBuilderObject empWageBuilderObject)
         {
-            int empHrs = 0, totalEmpSalary = 0, totalEmpHrs = 0, day = 0;
-            while (day <= empWageBuilderObject.empWorkingDayPerMonth && empHrs < empWageBuilderObject.empMaxWorkingHr)
+            while (day <= empWageBuilderObject.EmpWorkingDayPerMonth && empHrs < empWageBuilderObject.EmpMaxWorkingHr)
             {
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
@@ -55,13 +67,10 @@ namespace EmployeeWageComputation
                 }
                 day++;
                 totalEmpHrs += empHrs;
-                Console.WriteLine("\nDays@" + empWageBuilderObject.empWorkingDayPerMonth + "empHours " + empHrs);
+                Console.WriteLine("Days @" + empWageBuilderObject.EmpWorkingDayPerMonth + "empHours " + empHrs);
             }
-            return totalEmpSalary = totalEmpHrs * empWageBuilderObject.empWagePerHr;
-        }
-        public int GetTotalEmpWage(string comp_Name)
-        {
-            return (int)this.compToEmpWageMap[comp_Name].totalEmpWage;
+            totalEmpSalary = totalEmpHrs * empWageBuilderObject.EmpWagePerHr;
+
         }
     }
 }

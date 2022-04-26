@@ -8,27 +8,11 @@ namespace EmployeeWageComputation
 {
     public class EmpWageBuilderObject
     {
-        public string companyName;
-        public int empWagePerHr;
-        public int empMaxWorkingHr;
-        public int empWorkingDayPerMonth;
-        public decimal totalEmpWage;
-        public EmpWageBuilderObject(string companyName, int empWagePerHr, int maxWorkingHr, int empWorkingDaysPerMonth)
-        {
-            this.companyName = companyName;
-            this.empWagePerHr = empWagePerHr;
-            this.empMaxWorkingHr = maxWorkingHr;
-            this.empWorkingDayPerMonth = empWorkingDaysPerMonth;
-            this.totalEmpWage = 0;
-        }
-        public void SetTotalEmpWage(int totalEmpWage)
-        {
-            this.totalEmpWage = totalEmpWage;
-        }
-        public string toString()
-        {
-            return "Total Employee wage for Company:-->" + this.companyName + "=" + this.totalEmpWage;
-        }
+        public string CompanyName { get; set; }
+        public int EmpWagePerHr { get; set; }
+        public int EmpMaxWorkingHr { get; set; }
+        public int EmpWorkingDayPerMonth { get; set; }
+        public decimal TotalEmpWage { get; set; }
 
     }
 }
