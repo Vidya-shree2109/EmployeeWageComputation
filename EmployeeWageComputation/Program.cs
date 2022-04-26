@@ -1,11 +1,20 @@
-﻿using EmployeeWageComputation;
+﻿using System;
+using EmployeeWageComputation;
+class Program
+{
+    private static string companyName;
+    private static int empWagePerHr;
+    private static int empmaxWorkingHr;
+    private static int empWorkingDaysPerMonth;
 
-WageComputation samsung = new WageComputation("Samsung", 20, 5, 10);
-WageComputation reliance = new WageComputation("Reliance", 10, 4, 15);
-WageComputation airtel = new WageComputation("Airtel", 30, 5, 20);
-samsung.ComputeEmployeeWage();
-Console.WriteLine(samsung.displaySalary() + "\n");
-reliance.ComputeEmployeeWage();
-Console.WriteLine(reliance.displaySalary() + "\n");
-airtel.ComputeEmployeeWage();
-Console.WriteLine(airtel.displaySalary() + "\n");
+    public static void Main(String[] args)
+    {
+        WageComputation company = new WageComputation();
+        EmpWageBuilderObject wage = new EmpWageBuilderObject(companyName, empWagePerHr, empmaxWorkingHr, empWorkingDaysPerMonth);
+        company.AddCompanyEmpWage("SAMSUNG", 400, 200, 20);
+        company.AddCompanyEmpWage("RELIANCE", 500, 100, 15);
+        company.AddCompanyEmpWage("AIRTEL", 600, 150, 18);
+       // company.ComputeEmpWage();
+        Console.WriteLine(wage.toString());
+    }
+}
